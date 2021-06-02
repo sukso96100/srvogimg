@@ -20,14 +20,16 @@ var defaultImg []byte
 var fontSize = 80
 
 func main() {
-	dir, err := ioutil.TempDir("", "srvogimg")
-	if err != nil {
-		log.Fatal(err)
-	}
+
 	cachePath := os.Getenv("IMG_CACHE_PATH")
 	if cachePath != "" {
-		dir = cachePath
 		os.Mkdir(cachePath, 0755)
+	} else {
+		dir, err := ioutil.TempDir("", "srvogimg")
+		if err != nil {
+			log.Fatal(err)
+		}
+		cachePath = dir
 	}
 
 	r := gin.Default()
@@ -38,7 +40,7 @@ func main() {
 		imgurl := c.DefaultQuery("imgurl", "")
 		startColor := c.DefaultQuery("startcolor", "E95420")
 		endColor := c.DefaultQuery("endcolor", "772953")
-		filepath := filepath.Join(dir, getHashedFileName(text+imgurl+startColor+endColor))
+		filepath := filepath.Join(cachePath, getHashedFileName(text+imgurl+startColor+endColor))
 
 		_, err := ioutil.ReadFile(filepath)
 		if err == nil {
