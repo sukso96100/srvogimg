@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"image"
 	"image/color"
 	"io"
@@ -16,8 +15,6 @@ import (
 )
 
 func drawOgImage(text string, imgurl string, startColor string, endColor string, filepath string) string {
-	fmt.Printf("start: %s", startColor)
-	fmt.Printf("end: %s", endColor)
 	dc := gg.NewContext(1200, 600)
 
 	// Background

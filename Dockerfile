@@ -17,9 +17,10 @@ WORKDIR /dist
 
 RUN cp /build/main .
 
-FROM scratch
+FROM alpine
 
 COPY --from=builder /dist/main .
+RUN apk add --no-cache ca-certificates
 
 ENV IMG_CACHE_PATH ./cache
 EXPOSE 8080
