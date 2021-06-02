@@ -1,3 +1,4 @@
+![](./img/example.png)
 # srvogimg
 
 Simple Open graph card image server
@@ -10,10 +11,13 @@ Send `GET` request to `/render` with following params
 
 - `text`: Text to display.
 - `imgurl`: Web URL of the image to display
+- `startcolor`: Gradient start color in **hex** without **#** (e.g. `E95420`)
+- `endcolor`: Gradient start color in **hex** without **#** (e.g. `E95420`)
+
 
 Example:
 ```
-http://localhost:8080/render?imgurl=https://path.to.img/img.png&text=HelloWorld
+http://localhost:8080/render?imgurl=https://path.to.img/img.png&text=HelloWorld&startcolor=E95420&endcolor=E95420
 ```
 
 ## Credits
