@@ -7,7 +7,7 @@ ENV GO111MODULE=on \
 
 WORKDIR /build
 
-COPY go.mod go.sum main.go ./
+COPY . ./
 
 RUN go mod download
 
