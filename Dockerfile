@@ -21,5 +21,6 @@ FROM scratch
 
 COPY --from=builder /dist/main .
 
+ENV IMG_CACHE_PATH ./cache
 EXPOSE 8080
 ENTRYPOINT ["/main"]

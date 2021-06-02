@@ -5,14 +5,13 @@ Simple Open graph card image server
 
 ## Usage
 
-Run `go run .` to run test server
-
-Send `GET` request to `/render` with following params
-
-- `text`: Text to display.
-- `imgurl`: Web URL of the image to display
-- `startcolor`: Gradient start color in **hex** without **#** (e.g. `E95420`)
-- `endcolor`: Gradient start color in **hex** without **#** (e.g. `E95420`)
+- Configure `IMG_CACHE_PATH` environment variable, if you want to cache image on specific directory
+- Run `go run .` to run test server
+- Send `GET` request to `/render` with following params
+    - `text`: Text to display.
+    - `imgurl`: Web URL of the image to display
+    - `startcolor`: Gradient start color in **hex** without **#** (e.g. `E95420`)
+    - `endcolor`: Gradient start color in **hex** without **#** (e.g. `E95420`)
 
 
 Example:

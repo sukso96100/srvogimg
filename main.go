@@ -3,6 +3,7 @@ package main
 import (
 	"io/ioutil"
 	"log"
+	"os"
 	"path/filepath"
 
 	_ "embed"
@@ -22,6 +23,10 @@ func main() {
 	dir, err := ioutil.TempDir("", "srvogimg")
 	if err != nil {
 		log.Fatal(err)
+	}
+	cachePath := os.Getenv("IMG_CACHE_PATH")
+	if cachePath != "" {
+		dir = cachePath
 	}
 
 	r := gin.Default()
