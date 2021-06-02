@@ -27,6 +27,7 @@ func main() {
 	cachePath := os.Getenv("IMG_CACHE_PATH")
 	if cachePath != "" {
 		dir = cachePath
+		os.Mkdir(cachePath, 0755)
 	}
 
 	r := gin.Default()
