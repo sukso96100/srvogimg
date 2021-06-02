@@ -61,6 +61,7 @@ func drawOgImage(text string, imgurl string, startColor string, endColor string,
 	dc.SetFontFace(face)
 	dc.SetColor(color.White)
 	dc.DrawStringWrapped(text, 1200/2, 600*3/4, 0.5, 0.5, 1000, 0.8, gg.AlignCenter)
-	dc.SavePNG(filepath)
-	return filepath
+	imgfilePath := filepath + ".png"
+	dc.SavePNG(imgfilePath)
+	return imgfilePath
 }
