@@ -24,7 +24,7 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/render": {
+        "/render": {
             "get": {
                 "description": "Render a OGP image with logo and text",
                 "produces": [
@@ -43,6 +43,18 @@ var doc = `{
                         "type": "string",
                         "description": "Web URL of the logo image to display(Show default image if error occured when loading)",
                         "name": "imgurl",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Web URL of the logo image to display(Show default image if error occured when loading)",
+                        "name": "imgurl2",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Web URL of the logo image to display(Show default image if error occured when loading)",
+                        "name": "imgurl3",
                         "in": "query"
                     },
                     {

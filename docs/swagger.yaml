@@ -5,7 +5,7 @@ info:
   title: srvogimg
   version: "1.0"
 paths:
-  /api/render:
+  /render:
     get:
       description: Render a OGP image with logo and text
       operationId: render-ogp-image
@@ -18,6 +18,16 @@ paths:
           occured when loading)
         in: query
         name: imgurl
+        type: string
+      - description: Web URL of the logo image to display(Show default image if error
+          occured when loading)
+        in: query
+        name: imgurl2
+        type: string
+      - description: Web URL of the logo image to display(Show default image if error
+          occured when loading)
+        in: query
+        name: imgurl3
         type: string
       - description: 'Background gradient start (top left) color(Color code in HEX
           without #)'
