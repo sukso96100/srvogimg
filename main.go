@@ -12,7 +12,7 @@ import (
 
 // @title srvogimg
 // @version 1.0
-// @description Open Graph Protocol Card image generater service
+// @description A Service that renders Open Graph Protocol image to share on social media
 
 func main() {
 

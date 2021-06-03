@@ -25,14 +25,14 @@ func SetupApis(g *gin.Engine) {
 }
 
 // ShowAccount godoc
-// @Summary OGP 미리보기 이미지 생성
-// @Description OGP 미리보기 이미지 생성
+// @Summary Render a OGP image
+// @Description Render a OGP image with logo and text
 // @ID render-ogp-image
 // @Produce  image/png
-// @Param text query string false "표시할 텍스트(중간에 공백이 있어야 자동 줄바꿈 처리됨)"
-// @Param imgurl query string false "중앙 상단에 표시할 아이콘 이미지 파일의 웹 URL(없으면 표시 안하고, 이미지 조회중 오류 발생시 기본 이미지 표시)"
-// @Param startcolor query string false "배경 그라데이션 색상값(좌측 상단 시작, 6자리 16진수 색상 코드 # 없이 입력)"
-// @Param endcolor query string false "배경 그라데이션 색상값(우측 하단 끝, 6자리 16진수 색상 코드 # 없이 입력)"
+// @Param text query string false "Text to display(Needs space for automatic linebreak)"
+// @Param imgurl query string false "Web URL of the logo image to display(Show default image if error occured when loading)"
+// @Param startcolor query string false "Background gradient start (top left) color(Color code in HEX without #)"
+// @Param endcolor query string false "Background gradient end (bottom right) color(Color code in HEX without #)"
 // @Success 200
 // @Router /api/render [get]
 func renderBasicImage(c *gin.Context) {
