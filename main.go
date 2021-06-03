@@ -1,54 +1,25 @@
 package main
 
 import (
-	"io/ioutil"
-	"log"
-	"os"
-	"path/filepath"
+	_ "embed"
 
 	_ "embed"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sukso96100/srvogimg/draw"
+	"github.com/sukso96100/srvogimg/res"
 )
 
-//go:embed res/NotoSansCJKkr-Regular.otf
-var fontfile []byte
-
-//go:embed res/default.png
-var defaultImg []byte
-
-var fontSize = 80
+// @title srvogimg
+// @version 1.0
+// @description Open Graph Protocol Card image generater service
 
 func main() {
 
-	cachePath := os.Getenv("IMG_CACHE_PATH")
-	if cachePath != "" {
-		os.Mkdir(cachePath, 0755)
-	} else {
-		dir, err := ioutil.TempDir("", "srvogimg")
-		if err != nil {
-			log.Fatal(err)
-		}
-		cachePath = dir
-	}
+	res.InitCachePath()
 
 	r := gin.Default()
-	r.GET("/render", func(c *gin.Context) {
 
-		// Params
-		text := c.DefaultQuery("text", "Hello, World!")
-		imgurl := c.DefaultQuery("imgurl", "")
-		startColor := c.DefaultQuery("startcolor", "E95420")
-		endColor := c.DefaultQuery("endcolor", "772953")
-		filepath := filepath.Join(cachePath, getHashedFileName(text+imgurl+startColor+endColor))
-
-		_, err := ioutil.ReadFile(filepath)
-		if err == nil {
-			c.File(filepath)
-		}
-
-		path := drawOgImage(text, imgurl, startColor, endColor, filepath)
-		c.File(path)
-	})
+	draw.SetupApis(r)
 	r.Run()
 }
