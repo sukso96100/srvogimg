@@ -27,3 +27,15 @@ func InitCachePath() {
 		CachePath = dir
 	}
 }
+
+var DefaultGradientStartColor string = "E95420"
+var DefaultGradientEndColor string = "772953"
+
+func InitDefaultGradientColors() {
+	if os.Getenv("DEFAULT_START_COLOR") != "" {
+		DefaultGradientStartColor = os.Getenv("DEFAULT_START_COLOR")
+	}
+	if os.Getenv("DEFAULT_END_COLOR") != "" {
+		DefaultGradientEndColor = os.Getenv("DEFAULT_END_COLOR")
+	}
+}

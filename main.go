@@ -17,6 +17,7 @@ import (
 func main() {
 
 	res.InitCachePath()
+	res.InitDefaultGradientColors()
 
 	r := gin.Default()
 

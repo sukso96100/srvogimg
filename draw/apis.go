@@ -39,8 +39,8 @@ func renderBasicImage(c *gin.Context) {
 	// Params
 	text := c.DefaultQuery("text", "Hello, World!")
 	imgurl := c.DefaultQuery("imgurl", "")
-	startColor := c.DefaultQuery("startcolor", "030303")
-	endColor := c.DefaultQuery("endcolor", "676767")
+	startColor := c.DefaultQuery("startcolor", res.DefaultGradientStartColor)
+	endColor := c.DefaultQuery("endcolor", res.DefaultGradientEndColor)
 	filepath := filepath.Join(res.CachePath, generateHashFromString(text+imgurl+startColor+endColor))
 
 	// Serve cached file if exists
