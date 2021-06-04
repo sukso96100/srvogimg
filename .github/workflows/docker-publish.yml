@@ -13,9 +13,9 @@ on:
   # Run tests for any PRs.
   pull_request:
 
-env:
+#env:
   # TODO: Change variable to your image's name.
-  IMAGE_NAME: srvogimg
+  # IMAGE_NAME: srvogimg
 
 jobs:
   # Run tests.
@@ -65,5 +65,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}/${{env.IMAGE_NAME}}:latest
-            ghcr.io/${{ github.repository }}/${{env.IMAGE_NAME}}:${{ github.sha }}
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:${{ github.sha }}
