@@ -7,7 +7,6 @@ Simple Open graph card image server
 
 ### Environment variables
 - `IMG_CACHE_PATH`: If you want to cache image on specific directory
-- `APP_HOST`: Hostname (or domain) for the deployed app. Required to see RESTful API doc properly
 
 ### Run server
 

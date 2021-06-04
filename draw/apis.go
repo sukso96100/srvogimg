@@ -2,7 +2,6 @@ package draw
 
 import (
 	"io/ioutil"
-	"os"
 	"path/filepath"
 
 	"github.com/sukso96100/srvogimg/res"
@@ -15,11 +14,7 @@ import (
 )
 
 func SetupApis(g *gin.Engine) {
-	hostname := os.Getenv("APP_HOST")
-	if hostname == "" {
-		hostname = "localhost:8080"
-	}
-	url := ginSwagger.URL("//" + hostname + "/swagger/doc.json")
+	url := ginSwagger.URL("doc.json")
 	g.GET("/render", renderBasicImage)
 	g.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 }
