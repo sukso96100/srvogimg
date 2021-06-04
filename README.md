@@ -5,13 +5,18 @@ Simple Open graph card image server
 
 ## Usage
 
-- Configure `IMG_CACHE_PATH` environment variable, if you want to cache image on specific directory
-- Run `go run .` to run test server
-- Send `GET` request to `/render` with following params
-    - `text`: Text to display.
-    - `imgurl`: Web URL of the image to display
-    - `startcolor`: Gradient start color in **hex** without **#** (e.g. `E95420`)
-    - `endcolor`: Gradient start color in **hex** without **#** (e.g. `E95420`)
+### Environment variables
+- `IMG_CACHE_PATH`: If you want to cache image on specific directory
+- `APP_HOST`: Hostname (or domain) for the deployed app. Required to see RESTful API doc properly
+
+### Run server
+
+```bash
+go get
+go run .
+```
+
+Visit `/swagger/index.html`(If running on local environment, `localhost:8080/swagger/index.html`) to see available image render api
 
 
 Example:
@@ -21,6 +26,6 @@ http://localhost:8080/render?imgurl=https://path.to.img/img.png&text=HelloWorld&
 
 ## Credits
 - [Default icon - from icons8.com](https://icons8.com/icon/65355/document)
-- [Font - Spoqa Han Sans Neo + Emoji One]
+- Default font - Merged following 2 fonts
   - [Spoqa Han Sans Neo](https://spoqa.github.io/spoqa-han-sans/)
-  - [Adobe Emoji One](https://github.com/adobe-fonts/emojione-color)
+  - [Adobe EmojiOne Color](https://github.com/adobe-fonts/emojione-color)
