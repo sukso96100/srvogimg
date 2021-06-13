@@ -3,7 +3,6 @@ package draw
 import (
 	_ "embed"
 	"image"
-	"image/color"
 	"log"
 
 	"github.com/sukso96100/srvogimg/res"
@@ -13,14 +12,41 @@ import (
 	"golang.org/x/image/font/opentype"
 )
 
-func drawBasicOgImage(text string, imgurls []string, startColor string, endColor string, filepath string) string {
+func drawBasicOgImage(text string, imgurls []string, bgimgurl string, bgStartColor string, bgEndColor string, isDarkTheme bool, filepath string) string {
 
 	dc := gg.NewContext(ogImgWidth, ogImgHeight)
+	userColors := GetThemeColors(isDarkTheme)
 
-	// Background
-	dc.DrawRectangle(0, 0, ogImgWidthFloat, ogImgHeightFloat)
-	dc.SetFillStyle(NewGradientBackground(startColor, endColor, 255))
-	dc.Fill()
+	if bgimgurl != "" {
+		bgimg, err := LoadResizedBackgroundImage(bgimgurl)
+		if err == nil {
+			//Background image
+			dc.DrawImage(bgimg, 0, 0)
+
+			// Background image dimming
+			dc.DrawRectangle(0, 0, ogImgWidthFloat, ogImgHeightFloat)
+			if bgStartColor != "" {
+				bgcolor, _ := ParseHexColor(bgStartColor, 200)
+				dc.SetColor(bgcolor)
+			} else {
+				dc.SetColor(userColors.BackgroundColor)
+			}
+			dc.Fill()
+		}
+	} else {
+		// Background gradient
+		startColor := bgStartColor
+		endColor := bgEndColor
+		if startColor == "" {
+			startColor = res.DefaultGradientStartColor
+		}
+		if endColor == "" {
+			endColor = res.DefaultGradientEndColor
+		}
+		dc.DrawRectangle(0, 0, ogImgWidthFloat, ogImgHeightFloat)
+		dc.SetFillStyle(NewGradientBackground(startColor, endColor, 255))
+		dc.Fill()
+	}
 
 	resizedImgs := []image.Image{}
 	widthTotal := 0
@@ -56,7 +82,7 @@ func drawBasicOgImage(text string, imgurls []string, startColor string, endColor
 	})
 
 	dc.SetFontFace(face)
-	dc.SetColor(color.White)
+	dc.SetColor(userColors.TextColor)
 	dc.DrawStringWrapped(text, ogImgWidthFloat/2, ogImgHeightFloat*3/4, 0.5, 0.5, 1000, 0.8, gg.AlignCenter)
 
 	imgfilePath := filepath + ".png"
