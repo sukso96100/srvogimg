@@ -1,31 +1,25 @@
 package draw
 
 import (
-	"bytes"
 	_ "embed"
 	"image"
 	"image/color"
-	"io"
 	"log"
-	"net/http"
 
 	"github.com/sukso96100/srvogimg/res"
 
 	"github.com/fogleman/gg"
-	"github.com/nfnt/resize"
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/opentype"
 )
 
-const ogImgWidth int = 1200
-const ogImgHeight int = 600
-
 func drawBasicOgImage(text string, imgurls []string, startColor string, endColor string, filepath string) string {
-	dc := gg.NewContext(1200, 600)
+
+	dc := gg.NewContext(ogImgWidth, ogImgHeight)
 
 	// Background
-	dc.DrawRectangle(0, 0, 1200, 600)
-	dc.SetFillStyle(createBackground(startColor, endColor))
+	dc.DrawRectangle(0, 0, ogImgWidthFloat, ogImgHeightFloat)
+	dc.SetFillStyle(NewGradientBackground(startColor, endColor, 255))
 	dc.Fill()
 
 	resizedImgs := []image.Image{}
@@ -35,25 +29,7 @@ func drawBasicOgImage(text string, imgurls []string, startColor string, endColor
 	// Load Logo Images
 	for _, imgurl := range imgurls {
 		if imgurl != "" {
-			resp, err := http.Get(imgurl)
-			var iconimg []byte
-			if err != nil {
-				// handle error
-				iconimg = res.DefaultLogo
-			} else {
-				defer resp.Body.Close()
-				body, err := io.ReadAll(resp.Body)
-				if err != nil {
-					iconimg = res.DefaultLogo
-				}
-				iconimg = body
-			}
-
-			img, _, err := image.Decode(bytes.NewReader(iconimg))
-			if err != nil {
-				log.Fatalln(err)
-			}
-			m := resize.Resize(0, 200, img, resize.Lanczos3)
+			m, _ := LoadResizedLogoImage(imgurl, 0, 200)
 			resizedImgs = append(resizedImgs, m)
 			widthTotal += m.Bounds().Size().X + padding
 		}
@@ -81,7 +57,8 @@ func drawBasicOgImage(text string, imgurls []string, startColor string, endColor
 
 	dc.SetFontFace(face)
 	dc.SetColor(color.White)
-	dc.DrawStringWrapped(text, 1200/2, 600*3/4, 0.5, 0.5, 1000, 0.8, gg.AlignCenter)
+	dc.DrawStringWrapped(text, ogImgWidthFloat/2, ogImgHeightFloat*3/4, 0.5, 0.5, 1000, 0.8, gg.AlignCenter)
+
 	imgfilePath := filepath + ".png"
 	dc.SavePNG(imgfilePath)
 	return imgfilePath
