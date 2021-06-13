@@ -40,8 +40,11 @@ func renderBasicImage(c *gin.Context) {
 	imgurl := c.DefaultQuery("imgurl", "")
 	imgurl2 := c.DefaultQuery("imgurl2", "")
 	imgurl3 := c.DefaultQuery("imgurl3", "")
-	startColor := c.DefaultQuery("startcolor", res.DefaultGradientStartColor)
-	endColor := c.DefaultQuery("endcolor", res.DefaultGradientEndColor)
+	bgimgurl := c.DefaultQuery("bgimgurl", "")
+	startColor := c.DefaultQuery("bgstartcolor", "")
+	endColor := c.DefaultQuery("bgendcolor", "")
+	isDark := c.DefaultQuery("isdark", "true") == "true"
+
 	filepath := filepath.Join(res.CachePath,
 		GenerateHashFromString(text+imgurl+imgurl2+imgurl3+startColor+endColor))
 
@@ -62,7 +65,7 @@ func renderBasicImage(c *gin.Context) {
 		imgurls = append(imgurls, imgurl2)
 	}
 
-	path := drawBasicOgImage(text, imgurls, startColor, endColor, filepath)
+	path := drawBasicOgImage(text, imgurls, bgimgurl, startColor, endColor, isDark, filepath)
 	c.File(path)
 }
 
@@ -72,8 +75,8 @@ func renderArticleImage(c *gin.Context) {
 	sitename := c.DefaultQuery("sitename", "My Website")
 	bgimgurl := c.DefaultQuery("bgimgurl", "")
 	logoimgurl := c.DefaultQuery("logoimgurl", "")
-	bgStartColor := c.DefaultQuery("bgstartcolor", res.DefaultGradientStartColor)
-	bgEndColor := c.DefaultQuery("bgendcolor", res.DefaultGradientEndColor)
+	bgStartColor := c.DefaultQuery("bgstartcolor", "")
+	bgEndColor := c.DefaultQuery("bgendcolor", "")
 	isDark := c.DefaultQuery("isdark", "true") == "true"
 
 	filepath := filepath.Join(res.CachePath,

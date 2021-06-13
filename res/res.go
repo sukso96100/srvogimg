@@ -28,7 +28,7 @@ func InitCachePath() {
 	}
 }
 
-var DefaultGradientStartColor string = "E95420"
+var DefaultGradientStartColor string = "EB6536"
 var DefaultGradientEndColor string = "772953"
 
 func InitDefaultGradientColors() {

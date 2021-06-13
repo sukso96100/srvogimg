@@ -32,13 +32,26 @@ func drawArticleOgImage(
 
 			// Background image dimming
 			dc.DrawRectangle(0, 0, ogImgWidthFloat, ogImgHeightFloat)
-			dc.SetColor(userColors.BackgroundColor)
+			if bgStartColor != "" {
+				bgcolor, _ := ParseHexColor(bgStartColor, 200)
+				dc.SetColor(bgcolor)
+			} else {
+				dc.SetColor(userColors.BackgroundColor)
+			}
 			dc.Fill()
 		}
 	} else {
 		// Background gradient
+		startColor := bgStartColor
+		endColor := bgEndColor
+		if startColor == "" {
+			startColor = res.DefaultGradientStartColor
+		}
+		if endColor == "" {
+			endColor = res.DefaultGradientEndColor
+		}
 		dc.DrawRectangle(0, 0, ogImgWidthFloat, ogImgHeightFloat)
-		dc.SetFillStyle(NewGradientBackground(bgStartColor, bgEndColor, 255))
+		dc.SetFillStyle(NewGradientBackground(startColor, endColor, 255))
 		dc.Fill()
 	}
 

@@ -28,12 +28,12 @@ type ThemeColors struct {
 
 var LightColorTheme ThemeColors = ThemeColors{
 	color.Black,
-	color.RGBA{255, 255, 255, 180},
+	color.RGBA{174, 167, 159, 220},
 }
 
 var DarkColorTheme ThemeColors = ThemeColors{
 	color.White,
-	color.RGBA{0, 0, 0, 180},
+	color.RGBA{0, 0, 0, 200},
 }
 
 func ParseHexColor(hex string, alpha uint8) (color.Color, error) {
