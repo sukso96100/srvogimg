@@ -3,6 +3,7 @@ package draw
 import (
 	"io/ioutil"
 	"path/filepath"
+	"strconv"
 
 	"github.com/sukso96100/srvogimg/res"
 
@@ -15,7 +16,8 @@ import (
 
 func SetupApis(g *gin.Engine) {
 	url := ginSwagger.URL("doc.json")
-	g.GET("/render", renderBasicImage)
+	g.GET("/basic", renderBasicImage)
+	g.GET("/article", renderArticleImage)
 	g.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 }
 
@@ -41,7 +43,7 @@ func renderBasicImage(c *gin.Context) {
 	startColor := c.DefaultQuery("startcolor", res.DefaultGradientStartColor)
 	endColor := c.DefaultQuery("endcolor", res.DefaultGradientEndColor)
 	filepath := filepath.Join(res.CachePath,
-		generateHashFromString(text+imgurl+imgurl2+imgurl3+startColor+endColor))
+		GenerateHashFromString(text+imgurl+imgurl2+imgurl3+startColor+endColor))
 
 	// Serve cached file if exists
 	_, err := ioutil.ReadFile(filepath)
@@ -61,5 +63,22 @@ func renderBasicImage(c *gin.Context) {
 	}
 
 	path := drawBasicOgImage(text, imgurls, startColor, endColor, filepath)
+	c.File(path)
+}
+
+func renderArticleImage(c *gin.Context) {
+	title := c.DefaultQuery("title", "Hello, World!")
+	authors := c.DefaultQuery("authors", "Author")
+	sitename := c.DefaultQuery("sitename", "My Website")
+	bgimgurl := c.DefaultQuery("bgimgurl", "")
+	logoimgurl := c.DefaultQuery("logoimgurl", "")
+	bgStartColor := c.DefaultQuery("bgstartcolor", res.DefaultGradientStartColor)
+	bgEndColor := c.DefaultQuery("bgendcolor", res.DefaultGradientEndColor)
+	isDark := c.DefaultQuery("isdark", "true") == "true"
+
+	filepath := filepath.Join(res.CachePath,
+		GenerateHashFromString(title+authors+sitename+bgimgurl+logoimgurl+bgStartColor+bgEndColor+strconv.FormatBool(isDark)))
+
+	path := drawArticleOgImage(title, authors, sitename, bgimgurl, logoimgurl, bgStartColor, bgEndColor, isDark, filepath)
 	c.File(path)
 }
