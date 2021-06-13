@@ -59,14 +59,26 @@ var doc = `{
                     },
                     {
                         "type": "string",
+                        "description": "Web URL of the background image",
+                        "name": "bgimgurl",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "Background gradient start (top left) color(Color code in HEX without #)",
-                        "name": "startcolor",
+                        "name": "bgstartcolor",
                         "in": "query"
                     },
                     {
                         "type": "string",
                         "description": "Background gradient end (bottom right) color(Color code in HEX without #)",
-                        "name": "endcolor",
+                        "name": "bgendcolor",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Choose color scheme (true: dark, false: light)",
+                        "name": "isdark",
                         "in": "query"
                     }
                 ],

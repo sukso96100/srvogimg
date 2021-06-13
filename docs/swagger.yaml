@@ -29,15 +29,23 @@ paths:
         in: query
         name: imgurl3
         type: string
+      - description: Web URL of the background image
+        in: query
+        name: bgimgurl
+        type: string
       - description: 'Background gradient start (top left) color(Color code in HEX
           without #)'
         in: query
-        name: startcolor
+        name: bgstartcolor
         type: string
       - description: 'Background gradient end (bottom right) color(Color code in HEX
           without #)'
         in: query
-        name: endcolor
+        name: bgendcolor
+        type: string
+      - description: 'Choose color scheme (true: dark, false: light)'
+        in: query
+        name: isdark
         type: string
       produces:
       - image/png

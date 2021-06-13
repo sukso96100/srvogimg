@@ -30,8 +30,10 @@ func SetupApis(g *gin.Engine) {
 // @Param imgurl query string false "Web URL of the logo image to display(Show default image if error occured when loading)"
 // @Param imgurl2 query string false "Web URL of the logo image to display(Show default image if error occured when loading)"
 // @Param imgurl3 query string false "Web URL of the logo image to display(Show default image if error occured when loading)"
-// @Param startcolor query string false "Background gradient start (top left) color(Color code in HEX without #)"
-// @Param endcolor query string false "Background gradient end (bottom right) color(Color code in HEX without #)"
+// @Param bgimgurl query string false "Web URL of the background image"
+// @Param bgstartcolor query string false "Background gradient start (top left) color(Color code in HEX without #)"
+// @Param bgendcolor query string false "Background gradient end (bottom right) color(Color code in HEX without #)"
+// @Param isdark query string false "Choose color scheme (true: dark, false: light)"
 // @Success 200
 // @Router /render [get]
 func renderBasicImage(c *gin.Context) {
