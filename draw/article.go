@@ -56,7 +56,7 @@ func drawArticleOgImage(
 
 	dc.SetFontFace(face)
 	dc.SetColor(userColors.TextColor)
-	dc.DrawStringWrapped(title, ogImgWidthFloat/2, ogImgHeightFloat*1/6, 0.5, 0.5, 1000, 1.0, gg.AlignCenter)
+	dc.DrawStringWrapped(title, ogImgWidthFloat/2, ogImgHeightFloat*2/6, 0.5, 0.5, 1000, 1.0, gg.AlignCenter)
 
 	// Author
 	face, err = opentype.NewFace(f, &opentype.FaceOptions{
