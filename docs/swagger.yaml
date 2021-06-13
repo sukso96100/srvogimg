@@ -5,10 +5,56 @@ info:
   title: srvogimg
   version: "1.0"
 paths:
-  /render:
+  /article:
+    get:
+      description: Render a OGP image with Title, Author, website logo and website
+        name.
+      operationId: article-ogp-image
+      parameters:
+      - description: Title of article to display(Needs space for automatic linebreak)
+        in: query
+        name: title
+        type: string
+      - description: authors of article to display(Needs space for automatic linebreak)
+        in: query
+        name: authors
+        type: string
+      - description: Website name to display(Needs space for automatic linebreak)
+        in: query
+        name: sitename
+        type: string
+      - description: Web URL of the background image
+        in: query
+        name: bgimgurl
+        type: string
+      - description: Web URL of the logo image
+        in: query
+        name: logoimgurl
+        type: string
+      - description: 'Background gradient start (top left) color(Color code in HEX
+          without #)'
+        in: query
+        name: bgstartcolor
+        type: string
+      - description: 'Background gradient end (bottom right) color(Color code in HEX
+          without #)'
+        in: query
+        name: bgendcolor
+        type: string
+      - description: 'Choose color scheme (true: dark, false: light)'
+        in: query
+        name: isdark
+        type: string
+      produces:
+      - image/png
+      responses:
+        "200":
+          description: ""
+      summary: Render a Article OGP image
+  /basic:
     get:
       description: Render a OGP image with logo and text
-      operationId: render-ogp-image
+      operationId: basic-ogp-image
       parameters:
       - description: Text to display(Needs space for automatic linebreak)
         in: query
@@ -52,5 +98,5 @@ paths:
       responses:
         "200":
           description: ""
-      summary: Render a OGP image
+      summary: Render a Basic OGP image
 swagger: "2.0"

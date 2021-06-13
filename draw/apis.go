@@ -22,9 +22,9 @@ func SetupApis(g *gin.Engine) {
 }
 
 // ShowAccount godoc
-// @Summary Render a OGP image
+// @Summary Render a Basic OGP image
 // @Description Render a OGP image with logo and text
-// @ID render-ogp-image
+// @ID basic-ogp-image
 // @Produce  image/png
 // @Param text query string false "Text to display(Needs space for automatic linebreak)"
 // @Param imgurl query string false "Web URL of the logo image to display(Show default image if error occured when loading)"
@@ -35,7 +35,7 @@ func SetupApis(g *gin.Engine) {
 // @Param bgendcolor query string false "Background gradient end (bottom right) color(Color code in HEX without #)"
 // @Param isdark query string false "Choose color scheme (true: dark, false: light)"
 // @Success 200
-// @Router /render [get]
+// @Router /basic [get]
 func renderBasicImage(c *gin.Context) {
 	// Params
 	text := c.DefaultQuery("text", "Hello, World!")
@@ -71,6 +71,21 @@ func renderBasicImage(c *gin.Context) {
 	c.File(path)
 }
 
+// ShowAccount godoc
+// @Summary Render a Article OGP image
+// @Description Render a OGP image with Title, Author, website logo and website name.
+// @ID article-ogp-image
+// @Produce  image/png
+// @Param title query string false "Title of article to display(Needs space for automatic linebreak)"
+// @Param authors query string false "authors of article to display(Needs space for automatic linebreak)"
+// @Param sitename query string false "Website name to display(Needs space for automatic linebreak)"
+// @Param bgimgurl query string false "Web URL of the background image"
+// @Param logoimgurl query string false "Web URL of the logo image"
+// @Param bgstartcolor query string false "Background gradient start (top left) color(Color code in HEX without #)"
+// @Param bgendcolor query string false "Background gradient end (bottom right) color(Color code in HEX without #)"
+// @Param isdark query string false "Choose color scheme (true: dark, false: light)"
+// @Success 200
+// @Router /article [get]
 func renderArticleImage(c *gin.Context) {
 	title := c.DefaultQuery("title", "Hello, World!")
 	authors := c.DefaultQuery("authors", "Author")

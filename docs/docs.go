@@ -24,14 +24,79 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/render": {
+        "/article": {
+            "get": {
+                "description": "Render a OGP image with Title, Author, website logo and website name.",
+                "produces": [
+                    "image/png"
+                ],
+                "summary": "Render a Article OGP image",
+                "operationId": "article-ogp-image",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Title of article to display(Needs space for automatic linebreak)",
+                        "name": "title",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "authors of article to display(Needs space for automatic linebreak)",
+                        "name": "authors",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Website name to display(Needs space for automatic linebreak)",
+                        "name": "sitename",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Web URL of the background image",
+                        "name": "bgimgurl",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Web URL of the logo image",
+                        "name": "logoimgurl",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Background gradient start (top left) color(Color code in HEX without #)",
+                        "name": "bgstartcolor",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Background gradient end (bottom right) color(Color code in HEX without #)",
+                        "name": "bgendcolor",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Choose color scheme (true: dark, false: light)",
+                        "name": "isdark",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/basic": {
             "get": {
                 "description": "Render a OGP image with logo and text",
                 "produces": [
                     "image/png"
                 ],
-                "summary": "Render a OGP image",
-                "operationId": "render-ogp-image",
+                "summary": "Render a Basic OGP image",
+                "operationId": "basic-ogp-image",
                 "parameters": [
                     {
                         "type": "string",
