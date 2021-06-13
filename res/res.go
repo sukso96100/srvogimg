@@ -2,6 +2,7 @@ package res
 
 import (
 	_ "embed"
+	"image/color"
 	"io/ioutil"
 	"log"
 	"os"
@@ -14,6 +15,28 @@ var Fontfile []byte
 var DefaultLogo []byte
 
 var CachePath string
+
+type ThemeColors struct {
+	TextColor       color.Color
+	BackgroundColor color.Color
+}
+
+var LightColorTheme ThemeColors = ThemeColors{
+	color.Black,
+	color.RGBA{174, 167, 159, 220},
+}
+
+var DarkColorTheme ThemeColors = ThemeColors{
+	color.White,
+	color.RGBA{0, 0, 0, 200},
+}
+
+func GetThemeColors(isDarkTheme bool) ThemeColors {
+	if isDarkTheme {
+		return DarkColorTheme
+	}
+	return LightColorTheme
+}
 
 func InitCachePath() {
 	CachePath = os.Getenv("IMG_CACHE_PATH")

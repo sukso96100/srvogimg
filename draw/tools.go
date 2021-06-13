@@ -21,21 +21,6 @@ const ogImgHeight int = 600
 const ogImgWidthFloat float64 = 1200
 const ogImgHeightFloat float64 = 600
 
-type ThemeColors struct {
-	TextColor       color.Color
-	BackgroundColor color.Color
-}
-
-var LightColorTheme ThemeColors = ThemeColors{
-	color.Black,
-	color.RGBA{174, 167, 159, 220},
-}
-
-var DarkColorTheme ThemeColors = ThemeColors{
-	color.White,
-	color.RGBA{0, 0, 0, 200},
-}
-
 func ParseHexColor(hex string, alpha uint8) (color.Color, error) {
 	values, err := strconv.ParseUint(hex, 16, 32)
 
@@ -106,11 +91,4 @@ func GenerateHashFromString(filename string) string {
 	h.Write([]byte(filename))
 	hbytes := h.Sum(nil)
 	return fmt.Sprintf("%x", hbytes)
-}
-
-func GetThemeColors(isDarkTheme bool) ThemeColors {
-	if isDarkTheme {
-		return DarkColorTheme
-	}
-	return LightColorTheme
 }

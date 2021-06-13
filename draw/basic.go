@@ -15,7 +15,7 @@ import (
 func drawBasicOgImage(text string, imgurls []string, bgimgurl string, bgStartColor string, bgEndColor string, isDarkTheme bool, filepath string) string {
 
 	dc := gg.NewContext(ogImgWidth, ogImgHeight)
-	userColors := GetThemeColors(isDarkTheme)
+	userColors := res.GetThemeColors(isDarkTheme)
 
 	if bgimgurl != "" {
 		bgimg, err := LoadResizedBackgroundImage(bgimgurl)

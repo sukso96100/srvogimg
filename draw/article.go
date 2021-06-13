@@ -22,7 +22,7 @@ func drawArticleOgImage(
 	isDarkTheme bool,
 	filepath string) string {
 	dc := gg.NewContext(ogImgWidth, ogImgHeight)
-	userColors := GetThemeColors(isDarkTheme)
+	userColors := res.GetThemeColors(isDarkTheme)
 
 	if bgimgurl != "" {
 		bgimg, err := LoadResizedBackgroundImage(bgimgurl)
