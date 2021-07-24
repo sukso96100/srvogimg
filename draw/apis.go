@@ -30,6 +30,7 @@ func SetupApis(g *gin.Engine) {
 // @Param imgurl query string false "Web URL of the logo image to display(Show default image if error occured when loading)"
 // @Param imgurl2 query string false "Web URL of the logo image to display(Show default image if error occured when loading)"
 // @Param imgurl3 query string false "Web URL of the logo image to display(Show default image if error occured when loading)"
+// @Param logoimgurl query string false "Web URL of the logo image"
 // @Param bgimgurl query string false "Web URL of the background image"
 // @Param bgstartcolor query string false "Background gradient start (top left) color(Color code in HEX without #)"
 // @Param bgendcolor query string false "Background gradient end (bottom right) color(Color code in HEX without #)"
@@ -42,13 +43,14 @@ func renderBasicImage(c *gin.Context) {
 	imgurl := c.DefaultQuery("imgurl", "")
 	imgurl2 := c.DefaultQuery("imgurl2", "")
 	imgurl3 := c.DefaultQuery("imgurl3", "")
+	logoimgurl := c.DefaultQuery("logoimgurl", "")
 	bgimgurl := c.DefaultQuery("bgimgurl", "")
 	startColor := c.DefaultQuery("bgstartcolor", "")
 	endColor := c.DefaultQuery("bgendcolor", "")
 	isDark := c.DefaultQuery("isdark", "true") == "true"
 
 	filepath := filepath.Join(res.CachePath,
-		GenerateHashFromString(text+imgurl+imgurl2+imgurl3+startColor+endColor))
+		GenerateHashFromString(text+imgurl+imgurl2+imgurl3+logoimgurl+startColor+endColor))
 
 	// Serve cached file if exists
 	_, err := ioutil.ReadFile(filepath)
@@ -67,7 +69,7 @@ func renderBasicImage(c *gin.Context) {
 		imgurls = append(imgurls, imgurl2)
 	}
 
-	path := drawBasicOgImage(text, imgurls, bgimgurl, startColor, endColor, isDark, filepath)
+	path := drawBasicOgImage(text, imgurls, logoimgurl, bgimgurl, startColor, endColor, isDark, filepath)
 	c.File(path)
 }
 

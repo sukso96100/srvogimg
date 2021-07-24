@@ -124,6 +124,12 @@ var doc = `{
                     },
                     {
                         "type": "string",
+                        "description": "Web URL of the logo image",
+                        "name": "logoimgurl",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "description": "Web URL of the background image",
                         "name": "bgimgurl",
                         "in": "query"

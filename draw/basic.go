@@ -12,7 +12,15 @@ import (
 	"golang.org/x/image/font/opentype"
 )
 
-func drawBasicOgImage(text string, imgurls []string, bgimgurl string, bgStartColor string, bgEndColor string, isDarkTheme bool, filepath string) string {
+func drawBasicOgImage(
+	text string,
+	imgurls []string,
+	logoimgurl string,
+	bgimgurl string,
+	bgStartColor string,
+	bgEndColor string,
+	isDarkTheme bool,
+	filepath string) string {
 
 	dc := gg.NewContext(ogImgWidth, ogImgHeight)
 	userColors := res.GetThemeColors(isDarkTheme)
@@ -83,7 +91,30 @@ func drawBasicOgImage(text string, imgurls []string, bgimgurl string, bgStartCol
 
 	dc.SetFontFace(face)
 	dc.SetColor(userColors.TextColor)
-	dc.DrawStringWrapped(text, ogImgWidthFloat/2, ogImgHeightFloat*3/4, 0.5, 0.5, 1000, 0.8, gg.AlignCenter)
+	if logoimgurl != "" {
+		dc.DrawStringWrapped(text, ogImgWidthFloat/2, ogImgHeightFloat*3/5, 0.5, 0.5, 1000, 0.8, gg.AlignCenter)
+	} else {
+		dc.DrawStringWrapped(text, ogImgWidthFloat/2, ogImgHeightFloat*3/4, 0.5, 0.5, 1000, 0.8, gg.AlignCenter)
+	}
+
+	// Calculate Logo + Site name row width
+	logoRowWidth := 0
+	var logoimg image.Image
+	var logoimgError error
+	if logoimgurl != "" {
+		logoimg, logoimgError = LoadResizedLogoImage(logoimgurl, 0, 80)
+		if logoimgError == nil {
+			logoRowWidth += logoimg.Bounds().Size().X
+		}
+	}
+
+	// Draw Logo Images
+	logoRowItemAnchor := (ogImgWidth / 2) - (logoRowWidth / 2)
+	if logoimgurl != "" {
+		logoRowItemAnchor += (logoimg.Bounds().Size().X) / 2
+		dc.DrawImageAnchored(logoimg, logoRowItemAnchor, ogImgHeight*7/8, 0.5, 0.5)
+		logoRowItemAnchor += (logoimg.Bounds().Size().X) / 2
+	}
 
 	imgfilePath := filepath + ".png"
 	dc.SavePNG(imgfilePath)
