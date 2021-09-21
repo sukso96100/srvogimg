@@ -66,7 +66,7 @@ func renderBasicImage(c *gin.Context) {
 		imgurls = append(imgurls, imgurl2)
 	}
 	if imgurl3 != "" {
-		imgurls = append(imgurls, imgurl2)
+		imgurls = append(imgurls, imgurl3)
 	}
 
 	path := drawBasicOgImage(text, imgurls, logoimgurl, bgimgurl, startColor, endColor, isDark, filepath)
